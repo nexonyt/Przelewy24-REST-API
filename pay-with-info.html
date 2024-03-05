@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Płatność w Sklep Demo</title>
+    <!-- <link rel="stylesheet" href="startPayment.css"> -->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap');
+
+        * {
+            font-family: "Jost", sans-serif;
+            font-optical-sizing: auto;
+            font-weight: 400;
+            font-style: normal;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .payment-main {
+            width: 100%;
+            height: 90vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        input[type=submit] {
+            margin: 30px;
+            width: 200px;
+            height: 45px;
+            border: none;
+            color: white;
+            background-color: black;
+            transition: 0.2s ease-in-out all;
+        }
+
+        input[type=submit]:hover {
+            cursor: pointer;
+            border: 2px solid black;
+            color: black;
+            background-color: white;
+        }
+
+        .footer {
+            /* display: flex; */
+            justify-content: center;
+            font-size: 20px;
+            margin-top: 35px;
+            opacity: 0.5;
+            color: rgb(128, 128, 128);
+        }
+
+        .footer a {
+            text-decoration: none;
+            color: rgb(128, 128, 128);
+        }
+
+        .header-in-boxes {
+            margin: 15px 0px 0px 0px;
+            font-weight: 500;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="payment-main">
+        <div class="boxes" id="test-form">
+            <h3 class="header-in-boxes">Płatność - uzupełnij dane do płatności:</h3>
+            <form action="transactionRegister.php" method="POST">
+                <table>
+                    <tr>
+                        <td><label for="email">E-mail:</label></td>
+                        <td><input type="email" id="email" name="email" placeholder="Email" required></td>
+                    </tr>
+                    <tr>
+                        <td><label for="description">Opis:</label></td>
+                        <td><input type="text" id="description" name="description" placeholder="Opis przelewu"
+                                value="Telefon Samsung" required></td>
+                    </tr>
+                    <tr>
+                        <td><label for="amount">Kwota:</label></td>
+                        <td><input type="number" id="amount" class="amount" name="amount" placeholder="Kwota"
+                                value="500" required></td>
+                    </tr>
+                    <tr>
+                        <td><label for="currency">Waluta:</label></td>
+                        <td><input type="text" id="currency" name="currency" placeholder="Waluta" value="PLN" required>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Do zapłaty:</td>
+                        <td><span id="newAmount">5.00</span> PLN</td>
+                    </tr>
+                </table>
+                <input type="submit" name="process" value="Zapłać">
+            </form>
+        </div>
+        <div class="footer">
+            Stworzone przez <a href="https://github.com/nexonyt">NEXONSTUDIO</a> dla symulacji transakcji Przelewy24
+        </div>
+    </div>
+    <script>
+        const input = document.querySelector('.amount');
+        const span = document.querySelector('#newAmount');
+        input.addEventListener("input", (e) => {
+            span.textContent = ((e.currentTarget.value) / 100).toFixed(2);
+        });
+    </script>
+</body>
+
+</html>
