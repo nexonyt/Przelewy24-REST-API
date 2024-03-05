@@ -1,6 +1,6 @@
 # Przelewy24-REST-API
 
-![Alternatice](https://github.com/nexonyt/Przelewy24-REST-API/blob/main/github.jpg)
+![Alternatice](https://github.com/nexonyt/Przelewy24-REST-API/blob/main/git.png)
 
 
 
