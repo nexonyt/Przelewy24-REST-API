@@ -11,6 +11,10 @@
 - `transactionRegister.php` - plik PHP, który wysyła żądanie rejestracji transakcji, przekazując następnie klienta na formatkę Przelewy24 do wyboru metod płatości 
 - `notification-receiver.js` - endpoint podawany w żądaniu register, do przyjmowania notyfikacji z Przelewy24
 
+## Demo
+Aby zobaczyć przykład takiej integracji, przejdź na poniższą stronę i uzupełnij przykładowe dane. Jest to symulacja transakcji przeprowadzona przez Sandbox.
+nexonstudio.pl/payment
+
 ## Jak realizowana jest transakcja?
 1. Uzupełnienie danych przez klienta i wysłanie ich w żądaniu rejestracji transakcji (`transactionRegister.php`)
 2. Otrzymywany zwrotnie token oraz przekazywanie klienta na formatkę Przelewy24
