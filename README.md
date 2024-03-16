@@ -6,7 +6,8 @@
 
 ## Struktura
 
-- `startPayment.html` - plik z prostym formularzem, który przekazuje dane do pliku PHP
+- `pay-by-button.html` - plik z przyciskiem przekierowującym od razu do płatności
+- `pay-with-info.html` - plik z prostym formularzem do uzupełnienia przez klienta przekierowującym dalej do płatności
 - `transactionRegister.php` - plik PHP, który wysyła żądanie rejestracji transakcji, przekazując następnie klienta na formatkę Przelewy24 do wyboru metod płatości 
 - `notification-receiver.js` - endpoint podawany w żądaniu register, do przyjmowania notyfikacji z Przelewy24
 
@@ -51,7 +52,7 @@ Następnie w pliku `notification-receiver.js` w sekcji `4. Database Connection` 
 
 Dodatkowo w zapytaniu SQL należy zmienić nazwę tabeli z domyślnej ustawionej `notification` na własną.
 
-Uruchom polecenie `node notification-receiver.js` i sprawdź czy notyfikacja zostanie odebrana oraz żądanie weryfikacji wysłane. Transakcja powinna zmienić status na "Dokonana". 
+Uruchom polecenie `node notification-receiver.js` i sprawdź czy notyfikacja zostanie odebrana oraz żądanie weryfikacji wysłane. Transakcja powinna zmienić status na "Dokonana". Do potrzymania ciągłości pracy pliku polecam zainstalować menadżer procesów PM2 na serwerze. 
 
 Pamiętaj! Aby na twoim serwerze uruchomić plik należy mieć zainstalowane pakiet node. Dodatkowo plik `notification-receiver.js` musi na Twoim serwerze działać nieprzerwanie w tle i być cały czas dostępny.
 
@@ -79,7 +80,7 @@ Skrypt `notification-receiver.js` po właściwym odebraniu notyfikacji, wysyła 
 Jak przebiega proces płatności Przelewy24 na podstawie dokuementacji.
 Klient w formularzu na stronie wprowadza swoje dane. Po kliknięciu zapłać dane są przekazywane do pliku, który wysyła żądanie rejestracji transakcji do Przelewy24, gdzie zwrotnie otrzymywany jest token. 
 
-Token umieszcza się w linku `secure.przelewy24.pl/trnRequest/TOKEN` na który dalej jest przekierowany klient. W tym momencie wyświetla się formatka płatności. Klient wybiera metodę i opłaca zamówienie. Gdy Przelewy24 otrzymają informację o pozytywnej transakcji, na podany w `urlStatus` endpoint, wysyłana jest notyfikacja. Zwrotnie na notyfikację, skrypt wysyła żądanie rejestracji transakcji oraz zapisuje dane do bazy danych. 
+Token umieszcza się w linku `secure.przelewy24.pl/trnRequest/TOKEN` na który dalej jest przekierowany klient. W tym momencie wyświetla się formatka płatności. Klient wybiera metodę i opłaca zamówienie. Gdy Przelewy24 otrzymają informację o pozytywnej transakcji, na podany w `urlStatus` endpoint, wysyłana jest notyfikacja. Zwrotnie na notyfikację, skrypt wysyła żądanie weryfikacji transakcji oraz zapisuje dane do bazy danych. 
 
 > [!WARNING]  
 > Jeżeli notyfikacja przez skrypt nie zostanie odebrana i zwrotnie nie zostanie wysłane żądanie weryfikacji transakcji, transakcja pozostanie na statusie "Do wykorzystania". Status ten oznacza, że klient ma pełne prawo do środków i może zażądać ich zwrotu, ponieważ nie zostały one przekazane na nasze saldo. Transakcje należy zaksięgować, ponieważ środki mogą automatycznie zostać zwrócone.
