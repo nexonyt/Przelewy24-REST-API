@@ -13,7 +13,7 @@
 
 ## Demo
 Aby zobaczyć przykład takiej integracji, przejdź na poniższą stronę i uzupełnij przykładowe dane. Jest to symulacja transakcji przeprowadzona przez Sandbox.
-nexonstudio.pl/payment
+<https://www.nexonstudio.pl/payment>
 
 ## Jak realizowana jest transakcja?
 1. Uzupełnienie danych przez klienta i wysłanie ich w żądaniu rejestracji transakcji (`transactionRegister.php`)
